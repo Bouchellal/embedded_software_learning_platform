@@ -31,6 +31,30 @@ This will cover:
 
 From my experience, these concepts are the missing link in the ENP program for producing engineers ready to create products in Algeria.
 
+## The platform hardware
+
+                                ┌───────────────┐          ┌────────────────┐
+                                │             ┌┐│   UART   │┌┐            ┌┐│
+                                │  Raspberry  │◄┼──────────┼►│ STM32  ARM │││
+                                │  Pi 3/4 B   │││          │││ MPU Nucleo │││
+                                │             │││          │││            │││
+                                │             │││   GPIO   │││            │││
+                                │             │◄┼──────────┼┤│            │││
+                                │  Tester SW  │││   GPIO   │││ TESTED SW  │││
+                                │             │├┼──────────┼►│            │├┼───┐
+                                │┌─┐          │├┼─┐        │││            │├┼─┐ │
+                                ││ │          └┘│ │        │└┘            └┘│ │ │
+                                └└┬┘────────────┘ │        └────────────────┘ │ │
+                 Eth to User      │               │                           │ │
+      ◄───────────────────────────┘         ┌─────┘            ┌──────────────┘ │I2C/SPI
+                                            │I2C/SPI           │ I2C/SPI   ┌────┘
+                                            │                  │           │
+                                        ┌───┴───┐          ┌───┴───┐   ┌───┴───┐
+                                        │       ├──────────►       │   │       │
+                                        │  DAC  │          │  ADC  │   │ NVRAM │
+                                        │       ├──────────►       │   │       │
+                                        └───────┘          └───────┘   └───────┘
+
 Hence, the hardware platform that we provide will **not be spectacular**. We intend to include:
 
 - One Raspberry Pi (Model 3 or 4, Type B),
