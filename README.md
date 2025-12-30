@@ -73,7 +73,7 @@ As software engineers, we are aware that using links to external videos and less
 Thus, we **invite students** to inform us and **suggest** new links for better content.
 
 <details>
-<summary>The technical skills we will guide students through are:<summary>
+<summary>The technical skills we will guide students through are:</summary>
   - UML / SysML:
     - [ ] How to design and document software with diagrams.
 
@@ -106,4 +106,4 @@ Thus, we **invite students** to inform us and **suggest** new links for better c
     - [ ] Writing shell & bash scripts,
     - [ ] Understanding environment and sourcing,
     - [ ] Bootloader, Device Tree, Kernel, rootFS.
-<details>
+</details>
