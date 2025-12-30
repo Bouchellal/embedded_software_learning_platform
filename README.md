@@ -72,7 +72,8 @@ We will not necessarily provide tutorials and lessons for every technical concep
 As software engineers, we are aware that using links to external videos and lessons carries the risk that links become deprecated or content is no longer available.
 Thus, we **invite students** to inform us and **suggest** new links for better content.
 
-The technical skills we will guide students through are:
+<details>
+<summary>The technical skills we will guide students through are:<summary>
   - UML / SysML:
     - [ ] How to design and document software with diagrams.
 
@@ -105,3 +106,4 @@ The technical skills we will guide students through are:
     - [ ] Writing shell & bash scripts,
     - [ ] Understanding environment and sourcing,
     - [ ] Bootloader, Device Tree, Kernel, rootFS.
+<details>
