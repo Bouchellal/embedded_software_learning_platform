@@ -6,6 +6,8 @@ To start, power up the hardware platform using the dedicated power supply.
 
 ### Step 1: connecting to the Raspberry Pi
 
+#### Identifying the IP address of the Raspberry Pi
+
 On your personal computer (windows, mac, or linux) install Wireshark.
 
 Connect the Raspberry Pi to your computer using an Ethernet cable. Then, open Wireshark as administrator and start capturing packets on the Ethernet interface.
@@ -18,6 +20,52 @@ Filter the packet to only show ARP packets and unplug and plug the Ethernet cabl
 
 The IP address of the Raspberry Pi should be visible in the ARP packets. You can then use this IP address to connect to the Raspberry Pi using SSH.
 
+#### Configure your computer to be in the same subnet as the Raspberry Pi
+
+Configure your computer to be in the same subnet as the Raspberry Pi (for example, if the IP address of the Raspberry Pi is `192.168.10.10`):
+
+Windows (GUI method):
+1. Open Control Panel → Network and Internet → Network and Sharing Center
+2. Click Change adapter settings
+3. Right-click your Ethernet adapter → Properties
+4. Select Internet Protocol Version 4 (IPv4) → click Properties
+5. Choose Use the following IP address
+6. Enter:
+    IP address: 192.168.10.20
+    Subnet mask: 255.255.255.0
+    Default gateway: (optional, e.g. 192.168.10.1)
+    Click OK
+
+Windows (Command Line):
+
+1. Open Command Prompt as administrator:
+```cmd
+netsh interface ip set address name="Ethernet" static 192.168.10.20 255.255.255.0
+```
+
+(Replace "Ethernet" with your adapter name if different.)
+
+Linux (temporary setting using ip command):
+
+Run in terminal:
+
+```bash
+sudo ip addr add 192.168.10.20/24 dev eth0
+sudo ip link set eth0 up
+```
+
+/24 means that the subnet mask is 255.255.255.0.
+
+Replace eth0 with your interface (e.g. enp3s0, ens33)
+
+Check interface names with:
+
+```bash
+ip a
+```
+
+#### Connect to the Raspberry Pi using SSH
+
 Depending on your operating system, you can use different tools to connect to the Raspberry Pi using SSH:
 - On Windows, you can use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
 - On Mac and Linux, you can use the terminal and the `ssh` command.
@@ -28,6 +76,7 @@ Windows (using PuTTY):
 1. Open PuTTY.
 2. Enter the IP address of the Raspberry Pi in the "Host Name (or IP address)" field.
 3. Click "Open" to start the SSH session.
+
 ![PuTTY SSH Connection](../.images/02_hands_on_platform/putty_ssh.PNG)
 
 Mac and Linux (using terminal):
@@ -40,6 +89,7 @@ ssh 192.168.10.10
 In both cases, you will be prompted to enter the username and password for the Raspberry Pi. You can find these credentials on a sticker attached next to the Raspberry Pi.
 
 ### Step 2: Connect to Wi-Fi
+
 Once you are connected to the Raspberry Pi, you can connect it to a Wi-Fi network using the following steps:
 1. Open the terminal on the Raspberry Pi.
 2. Run this command to open the Wi-Fi configuration file:
@@ -55,7 +105,7 @@ You should see an IP address assigned to the Wi-Fi interface (usually `wlan0`).
 
 You can now disconnect the Ethernet cable from the Raspberry Pi and continue to use the Wi-Fi connection to access it using this IP address.
 
-### Step 2: Python Hello World
+### Step 3: Python Hello World
 
 Once you are connected to the Raspberry Pi, create your own directory and navigate to it:
 ```bash
@@ -73,7 +123,7 @@ Finally, run the Python script:
 python3 hello_world.py
 ```
 
-### Step 3: Blinky
+### Step 4: Blinky
 
 Now, let's make the three LEDs connected to the raspberry pi blink. To do this, we will use the gpiod library.
 
