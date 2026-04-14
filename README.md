@@ -1,5 +1,19 @@
 # Embedded Software Learning Platform
 
+## TL;DR
+
+We, Polytechnique Algiers alumni, built a hardware platform inspired from real life On-board Avionic Product development process and delivered multiple examples in ENP Algiers.
+
+We provide here in this Github repository:
+  - [ ] Links to learn prerequisites embedded software concepts,
+  - [ ] Links to learn development processes,
+  - [ ] A guided project inspired from real-world development process of an Avionic Product,
+  - [ ] A guideline on how to manage the life cycle of a product, with this platform as an example.
+  - [ ] Documentation of the hardware platform:
+    - [ ] Design Documents.
+    - [ ] Maintenance and Auto-Test of the platform.
+    - [ ] Traceability of each individual platform.
+
 ## Introduction
 
 This project is my attempt to create a learning platform and assemble a set of courses aimed at helping students at École Nationale Polytechnique (**ENP**) in Algiers fill gaps in the current academic curriculum.
@@ -36,24 +50,24 @@ From my experience, these concepts are the missing link in the ENP program for p
                                 ┌───────────────┐          ┌────────────────┐
                                 │             ┌┐│   UART   │┌┐            ┌┐│
                                 │  Raspberry  │◄┼──────────┼►│ STM32  ARM │││
-                                │  Pi 3/4 B   │││          │││ MPU Nucleo │││
-                                │             │││          │││            │││
+                                │  Pi 4 B 1GB │││          │││ MPU Nucleo │││
+                                │             │││          │││   G071RB   │││
                                 │             │││   GPIO   │││            │││
                                 │             │◄┼──────────┼┤│            │││
                                 │  Tester SW  │││   GPIO   │││ TESTED SW  │││
-                                │             │├┼──────────┼►│            │├┼───┐
-                                │┌─┐          │├┼─┐        │││            │├┼─┐ │
-                                ││ │          └┘│ │        │└┘            └┘│ │ │
-                                └└┬┘────────────┘ │        └────────────────┘ │ │
-                 Eth to User      │               │                           │ │
-      ◄───────────────────────────┘         ┌─────┘            ┌──────────────┘ │I2C/SPI
-                                            │I2C/SPI           │ I2C/SPI   ┌────┘
-                                            │                  │           │
-                                        ┌───┴───┐          ┌───┴───┐   ┌───┴───┐
-                                        │       ├──────────►       │   │       │
-                                        │  DAC  │          │  ADC  │   │ NVRAM │
-                                        │       ├──────────►       │   │       │
-                                        └───────┘          └───────┘   └───────┘
+                                │             │├┼──────────┼►│            │├┼────┐
+                                │┌─┐          │├┼─┐        │││            │├┼─┐  │
+                                ││ │          └┘│ │        │└┘            └┘│ │  │
+                                └└┬┘────────────┘ │        └────────────────┘ │  │
+                 Eth to User      │               │                           │  │
+      ◄───────────────────────────┘               │                  ┌────────┘  │
+                                                  │I2C               │ I2C       │ SPI
+                                                  │                  │           │
+                                              ┌───┴───┐          ┌───┴───┐   ┌───┴───┐
+                                              │       ├──────────►       │   │       │
+                                              │  DAC  │          │  ADC  │   │ NVRAM │
+                                              │       ├──────────►       │   │       │
+                                              └───────┘          └───────┘   └───────┘
 
 Hence, the hardware platform that we provide will **not be spectacular**. We intend to include:
 
@@ -72,38 +86,37 @@ We will not necessarily provide tutorials and lessons for every technical concep
 As software engineers, we are aware that using links to external videos and lessons carries the risk that links become deprecated or content is no longer available.
 Thus, we **invite students** to inform us and **suggest** new links for better content.
 
-<details>
-<summary>The technical skills we will guide students through are:</summary>
+The technical skills we will guide students through are:
+
   - UML / SysML:
-    - [ ] How to design and document software with diagrams.
+    - [x] How to design and document software/system with diagrams.
 
   - Version control:
-    - [ ] Master git workflow.
+    - [x] Master git workflow,
+    - [x] Master git precommit.
 
   - Basic C code:
-    - [ ] Structures,
-    - [ ] Cross-compilation,
-    - [ ] Memory layout (code, data, heap, and stack),
-    - [ ] Coding with linters and standards,
-    - [ ] Coding critical software.
+    - [x] Structures,
+    - [x] Compilation,
+    - [x] Memory layout (code, data, heap, and stack),
+    - [x] Coding with linters and standards,
+    - [x] Coding critical software.
 
   - Basic Python:
-    - [ ] Object-oriented programming,
-    - [ ] Coding with linters and standards.
+    - [x] Object-oriented programming,
+    - [x] Coding with linters and standards.
 
   - Robot Framework:
-    - [ ] Automated testing,
-    - [ ] Write your own test steps library for embedded system.
+    - [x] Automated testing,
+    - [x] Write your own test steps library for embedded system.
 
   - Embedded Systems:
-    - [ ] Reading data sheets,
-    - [ ] Configuring and reading registers,
-    - [ ] Understanding PinMux-ing and manually applying it.
+    - [x] Configuring and reading registers,
+    - [x] Understanding PinMux-ing and manually applying it.
 
   - Linux:
-    - [ ] [ ] Understanding file system,
-    - [ ] Learning basic Linux commands,
-    - [ ] Writing shell & bash scripts,
-    - [ ] Understanding environment and sourcing,
-    - [ ] Bootloader, Device Tree, Kernel, rootFS.
-</details>
+    - [x] Understanding file system,
+    - [x] Learning basic Linux commands,
+    - [x] Writing shell & bash scripts,
+    - [x] Understanding environment and sourcing,
+    - [x] Bootloader, Device Tree, Kernel, rootFS.
