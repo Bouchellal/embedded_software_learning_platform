@@ -19,7 +19,7 @@ Filter the packet to only show ARP packets and unplug and plug the Ethernet cabl
 The IP address of the Raspberry Pi should be visible in the ARP packets. You can then use this IP address to connect to the Raspberry Pi using SSH.
 
 Depending on your operating system, you can use different tools to connect to the Raspberry Pi using SSH:
-- On Windows, you can use [PuTTY](https://www.putty.org/).
+- On Windows, you can use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
 - On Mac and Linux, you can use the terminal and the `ssh` command.
 
 for example, if the IP address of the Raspberry Pi is `192.168.10.10`, you can connect to it using the following steps:
