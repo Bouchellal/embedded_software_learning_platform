@@ -160,6 +160,14 @@ sudo systemctl start pigpiod
 
 Now, you can create a Python script to blink the LEDs. Here's an example script that blinks the three LEDs connected to GPIO pins X, Y, and Z (replace these with the actual GPIO pin numbers, visually identify the pins connected to the LEDs on your Raspberry Pi, for example, GPIO 29, GPIO 31, and GPIO 37):
 
+Use nano as text editor to create the script. run this command in the terminal:
+
+```bash
+nano blink_leds.py
+```
+
+Then, add the following code to the script (copy this script and paste it into the nano editor using right-click):
+
 ```python
 import time
 import pigpio
@@ -200,6 +208,14 @@ except KeyboardInterrupt:
     pi.write(RED_LED_PIN, 0) # Turn off LED
     pi.write(YELLOW_LED_PIN, 0) # Turn off LED
     pi.stop()            # Disconnect from the daemon
+```
+
+Save the file and exit nano (Ctrl+S, then Ctrl+X).
+
+Finally, run the script:
+
+```bash
+python3 blink_leds.py
 ```
 
 ## Hands-On STM32 Nucleo
