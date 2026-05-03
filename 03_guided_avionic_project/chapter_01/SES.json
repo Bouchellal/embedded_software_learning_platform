@@ -1,0 +1,281 @@
+[
+  {
+    "identifier": "AEME-SYS-0001",
+    "title": "System maximum weight constraint",
+    "text": "The system shall not exceed a maximum weight of 4kg",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0001",
+    "allocation": "",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0002",
+    "title": "System maximum size constraint",
+    "text": "The system shall not exceed a maximum size of 400mm x 300mm x 100mm",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0002",
+    "allocation": "",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0003",
+    "title": "System electrical connector compliance",
+    "text": "The system shall interface with exactly two MIL-DTL-38999 Series III Connectors: one named 'POWER_CONNECTOR' dedicated for power supply and one named 'DATA_CONNECTOR' dedicated for data and configuration",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0003",
+    "allocation": "Hardware, Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0004",
+    "title": "System mechanical mounting interface",
+    "text": "The system shall provide 4 AN3-5A bolt mounting points arranged in a flat square pattern with 150mm spacing, centered on the system's geometric center",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0004",
+    "allocation": "Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0005",
+    "title": "System HMI LED hardware",
+    "text": "The system shall incorporate 3 discrete colored LEDs (red, green, yellow) as visual indicators for human-machine interface",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0005",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0006",
+    "title": "System HMI LED operation states",
+    "text": "The system shall display distinct LED patterns for each operational state: yellow at startup, blinking yellow during configuration mode, blinking red upon internal error detection, steady red upon external error detection, blinking green during standby, steady green when armed and monitoring without issues, and alternating green/yellow blink when threshold is exceeded and power is cut",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0006",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0007",
+    "title": "System STANDBY_PIN input signal interface",
+    "text": "The system shall provide a STANDBY_PIN input pin on the DATA_CONNECTOR capable of receiving GND-24V level signals",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0007",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0008",
+    "title": "System ENGINE_POWER_ON_OFF_PIN_PIN control output signal interface",
+    "text": "The system shall provide an ENGINE_POWER_ON_OFF_PIN output pin on the DATA_CONNECTOR capable of driving GND-24V level signals",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0008",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0009",
+    "title": "System STANDBY_MODE entry condition",
+    "text": "The system shall enter STANDBY_MODE when the STANDBY_PIN is asserted to GND level",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0009",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0010",
+    "title": "System MONITORING_MODE entry condition",
+    "text": "The system shall enter MONITORING_MODE when the standby pin is asserted to High level",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0010",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0011",
+    "title": "System ANALOG_INPUT_1 input signal interface",
+    "text": "The system shall provide a ANALOG_INPUT_1 input pin on the DATA_CONNECTOR capable of receiving GND-24V level signals",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0011",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0012",
+    "title": "System ANALOG_INPUT_2 input signal interface",
+    "text": "The system shall provide a ANALOG_INPUT_2 input pin on the DATA_CONNECTOR capable of receiving GND-24V level signals",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0011",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0013",
+    "title": "Monitoring of analog input signals",
+    "text": "When on monitoring mode, the system shall continuously monitor ANALOG_INPUT_1 and ANALOG_INPUT_2 signals",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0011",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0014",
+    "title": "Resolution of monitoring of analog input signals",
+    "text": "The system shall continuously monitor analog input signals, with resolution of at least 1 Volt.",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0011",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0015",
+    "title": "Frequency of monitoring of analog input signals",
+    "text": "The system shall continuously monitor analog input signals, with a frequency of at least 1 Hz.",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0011",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0016",
+    "title": "System default threshold and hysteresis configuration",
+    "text": "The system shall define and apply default threshold and hysteresis values for ANALOG_INPUT_1 and ANALOG_INPUT_2 signals as follows: Threshold 1 at 10V with hysteresis at 9V, Threshold 2 at 20V with hysteresis at 18V",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0012",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0017",
+    "title": "System threshold exceedance response",
+    "text": "The system shall set the ENGINE_POWER_ON_OFF_PIN pin to High when any monitored signal exceeds its configured threshold value.",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0013",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0018",
+    "title": "System threshold recovery condition",
+    "text": "The system shall set the ENGINE_POWER_ON_OFF_PIN pin to Low only after both monitored signals fall below their respective hysteresis values",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0014",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0019",
+    "title": "System threshold recovery response time",
+    "text": "The system shall have a response time of less than 500 ms to set the ENGINE_POWER_ON_OFF_PIN pin to High and back to Low",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0013;AEME-HLS-0014",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0020",
+    "title": "System software reprogramming capability",
+    "text": "The system shall support full reprogramming of its controller software through an internal connector that is only accessible after physically opening the equipment case",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0015",
+    "allocation": "Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0021",
+    "title": "System external connector programming protection",
+    "text": "The system shall prevent any software reprogramming attempts through external connectors",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0016",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },  
+  {
+    "identifier": "AEME-SYS-0022",
+    "title": "System non-volatile data bank",
+    "text": "The system shall provide a Non-Volatile Memory bank to store configuration and calibration data, ensuring data persistence across power cycles",
+    "verification_method": "Inspection, Test",
+    "parent": "AEME-HLS-0016",
+    "allocation": "Software, Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0023",
+    "title": "System Command Line Interface (CLI) ports",
+    "text": "The system shall provide a Command Line Interface (CLI) port using UART protocol on an DATA_CONNECTOR for data exchange and configuration communication with maintenance tools",
+    "verification_method": "Inspection, Test",
+    "parent": "AEME-HLS-0017; AEME-HLS-0018",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0024",
+    "title": "System configurable parameters: thresholds and hysteresis",
+    "text": "The system shall store in Non-Volatile Memory and allow configuration through CLI of the following parameters: THRESHOLD_1, THRESHOLD_1_HYSTERESIS, THRESHOLD_2, THRESHOLD_2_HYSTERESIS",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0019",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0025",
+    "title": "System configurable parameters: Equipment identification",
+    "text": "The system shall store in Non-Volatile Memory and allow configuration through CLI of the following parameters: PART_NUMBER, SERIAL_NUMBER",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0021",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0026",
+    "title": "System configurable parameters: Equipment lifecycle data",
+    "text": "The system shall store in Non-Volatile Memory and allow configuration through CLI of the following parameters: PART_NUMBER, SERIAL_NUMBER, MANUFACTURE_DATE, LAST_MAINTENANCE_DATE, POWER_CYCLE_COUNT, UPTIME_MINUTES, LAST_FAILURE_CODE, LAST_FAILURE_UPTIME_STAMP",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0027",
+    "title": "System identification marking",
+    "text": "The system shall have a permanently affixed PN/SN (Part Number/Serial Number) sticker visible on the external case",
+    "verification_method": "Inspection",
+    "parent": "AEME-HLS-0020",
+    "allocation": "Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0028",
+    "title": "System identification readback capability",
+    "text": "The system shall provide the PN/SN (Part Number/Serial Number) in a readable format to maintenance personnel through the configuration port",
+    "verification_method": "Test",
+    "parent": "AEME-HLS-0021",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0029",
+    "title": "System Non-Volatile Memory corruption detection",
+    "text": "The system shall implement a mechanism to detect Non-Volatile Memory corruption 'data field' per 'data field'.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0030",
+    "title": "System Non-Volatile Memory corruption management",
+    "text": "The system shall store a duplicate of each data field, and fallback to the duplicate in case of corruption of the original data field.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0031",
+    "title": "System Non-Volatile Memory double corruption management",
+    "text": "In case of double corruption of a data field, the system shall shut down the engine and raise an internal error alarm on the HMI",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "Software",
+    "variant": "current"
+  }
+]

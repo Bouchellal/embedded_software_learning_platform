@@ -1,0 +1,191 @@
+[
+  {
+    "identifier": "AEME-HLS-0001",
+    "title": "Maximum equipment weight",
+    "text": "The equipment shall be of a maximum weight of 4kg",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0002",
+    "title": "Maximum equipment size",
+    "text": "The equipment shall be of a maximum size of 400mm x 300mm x 100mm",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0003",
+    "title": "Electrical connector type",
+    "text": "The equipment shall operate only with two MIL-DTL-38999 Series III Connectors as electrical connectors. One for power, the other for data and configuration",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0004",
+    "title": "Mechanical interface specification",
+    "text": "The equipment shall have the following mechanical interface: 4 AN3-5A Bolts, in a flat square of 150mm, with the center of the square being the center of the equipment",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0005",
+    "title": "HMI LED configuration",
+    "text": "The equipment shall have 3 colored LED (red, green, yellow) as a Human Machine Interface (HMI)",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0006",
+    "title": "HMI LED status patterns",
+    "text": "The equipment HMI shall follow this pattern: yellow at startup, blinking yellow when in configuration mode from maintenance personnel, blinking red when internal error is found, red when external error is found, blinking green when on standby, green when armed (monitoring is on-going with no issue), alternating blinking green then yellow when monitoring is going and thresholds are detected and equipment has cut power on engine",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0007",
+    "title": "Standby pin on external connector",
+    "text": "The equipment shall have a standby input pin on the external connector",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0008",
+    "title": "Engine power on/off pin on external connector",
+    "text": "The equipment shall have an engine_power_on_off output pin on the external connector",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0009",
+    "title": "Standby mode activation",
+    "text": "When the standby pin is at GND level, the equipment shall enter the standby mode",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0010",
+    "title": "Monitoring mode activation",
+    "text": "When the standby pin is at High level, the equipment shall enter the monitoring mode",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0011",
+    "title": "Analog signal monitoring specification",
+    "text": "When on monitoring mode, the equipment shall monitor 2 analog signals, both ranging from 0V to 24V",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0012",
+    "title": "Default threshold and hysteresis values",
+    "text": "The equipment shall define default threshold values and hysteresis values for each signal as follows: Threshold 1 at 10V with hysteresis at 9V, Threshold 2 at 20V with hysteresis at 18V",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0013",
+    "title": "Threshold breach engine power cut-off",
+    "text": "When any threshold is exceeded, the equipment shall cut the power on the engine by setting the engine_power_on_off pin to High",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0014",
+    "title": "Engine power restoration condition",
+    "text": "The equipment shall set the engine_power_on_off pin back to Low only when both signals are below their respective hysteresis values",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0015",
+    "title": "Internal software reprogramming",
+    "text": "The equipment controller's software shall be fully reprogrammable through internal connector only available after opening the case",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0016",
+    "title": "External connector reprogramming restriction",
+    "text": "The equipment controller shall not be reprogrammable from the external connectors",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0017",
+    "title": "Configuration port on external connector",
+    "text": "The equipment shall have a configuration port on the external connector dedicated for data and configuration communication",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0018",
+    "title": "Configuration port communication capability",
+    "text": "The configuration port shall communicate with the controller software to reprogram non-volatile data",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0019",
+    "title": "Maintenance reconfiguration capability",
+    "text": "The equipment shall allow the maintenance team to reconfigure the 2 thresholds and 2 hysteresis values through the equipment controller software",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0020",
+    "title": "Part Number and Serial Number sticker",
+    "text": "The equipment shall have a PN/SN (Part Number/Serial Number) sticker on its case",
+    "verification_method": "Inspection",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "AEME-HLS-0021",
+    "title": "PN/SN availability through configuration port",
+    "text": "The equipment shall have the PN/SN (Part Number/Serial Number) available for the maintenance team to read from the controller configuration port",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  }
+] 
