@@ -8,10 +8,14 @@ AEME_PROJECT/
     └── Requirement_Management_and_Traceability/
         ├── requirement_sanity_checker.py
         └── traceability_matrix.py
-
 ```
 
 Your task is to write two Python scripts:
+
+<details>
+  <summary>If you do not want to learn Python and Software:</summary>
+  You can read what these script should do, and do it manually.
+</details>
 
 ## 1. `requirement_sanity_checker.py`: 
 
@@ -110,6 +114,8 @@ The script shall make the justification empty if there is at least one lower req
 
 The script shall put as a justification "NO CHILDREN! MUST JUSTIFY" so that the user manually edits the csv file.
 
+The script shall calculate and print the percentage of covered requirements calculated as:
+$$ \text{Coverage percentage} = \frac{\text{number of upper requirements that have children}}{\text{number of upper requirements}} $$
 
 ### 2.2 Lower to Upper requirement traceability
 
@@ -131,6 +137,8 @@ The script shall make the justification empty if there is at least one upper req
 
 The script shall put as a justification "NO PARENTS! MUST JUSTIFY" so that the user manually edits the csv file.
 
+The script shall calculate and print the percentage of covered requirements calculated as:
+$$ \text{Coverage percentage} = \frac{\text{number of lower requirements that have parents}}{\text{number of lower requirements}} $$
 
 Just like the previous script, this script shall undergo flake8 and mypy verifications.
 
@@ -154,5 +162,12 @@ With the resulted .csv file, create an Excel sheet or Doc with the following cha
 2. SES to HLS matrix
    1. Covered requirements
    2. Derived requirements (uncovered requirement, with justification for each requirement)
+
+
+The document should look like this:
+
+![cross_matrix_1](../../.images/03_guided_avionic_project/matrix_upper_to_lower.jpg)
+
+![cross_matrix_1](../../.images/03_guided_avionic_project/matrix_lower_to_upper.jpg)
 
 Put this document in the System Development folder, next to the SES.json
