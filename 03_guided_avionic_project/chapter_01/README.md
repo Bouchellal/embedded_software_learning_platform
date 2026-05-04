@@ -69,8 +69,11 @@ For example, here is the V-Cycle for the System level with its inputs and output
 
 **For the next couple of tasks you do not need the hardware platform.**
 
-Task 0: Set up the project folder on your own computer. [Go to Task 0](./_task_0.md)
+Task 0: Set up the project folder on your own computer. [Go to task 0](./_task_0.md)
 
-Task 1: Review the System Requirements written by Djamal (the System Architect). [Go to Task 1](./_task_1.md)
+Task 1: Review the System Requirements written by Djamal (the System Architect). [Go to task 1](./_task_1.md)
 
-Task 2: Create a python project to automate the requirement management and traceability. [Go to Task 2](./_task_2.md)
+Task 2: Create a python project to automate the requirement management and traceability. [Go to task 2](./_task_2.md)
+
+Task 3: Help the System engineer draw the System Diagrams. [Go to task 3](./_task_3.md)
+
