@@ -46,4 +46,3 @@ Task 1: Review the System Requirements written by Djamal (the System Architect).
 Task 2: Create a python project to automate the requirement management and traceability. [Go to task 2](./_task_2.md)
 
 Task 3: Help the System engineer draw the System Diagrams. [Go to task 3](./_task_3.md)
-

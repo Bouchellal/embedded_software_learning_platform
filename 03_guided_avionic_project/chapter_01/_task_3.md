@@ -92,11 +92,37 @@ If you need more tips and hints on each one of these diagrams, you will get them
 
 <details>
   <summary>Tip 1!</summary>
-  Think of this diagram as "what does he system do?".
+  Think of this diagram as "what are the physical blocks of the system?".
+</details>
 
-- Each functionality is a square with the name in it.
-- Sub-functionalities should be inside the square of main functionalities.
-- Inputs and outputs of functionalities are shown in thick arrows.
+<details>
+  <summary>Tip 2!</summary>
+
+- The system is a big square,
+- Each physical block is a square inside the system,
+- Each square will be linked with arrows to the other physical blocks they interact with,
+- Sub blocks are drawn inside of main blocks.
+</details>
+
+<details>
+  <summary>Hint: what are the physical blocks?!</summary>
+
+- Case and enclosure (mechanical part),
+- Outside connectors,
+- Inside connector,
+- AC-DC power converter,
+- MCU (Micro Controller Unit),
+- Analog-Digital-Converter (ADC for analog inputs),
+- Non-Volatile-Memory (NVRAM),
+- Relays (to control digital outputs),
+- LEDs (Human Machine Interface),
+- PCB (Printed Circuit Board).
+</details>
+
+<details>
+  <summary>My suggestion</summary>
+
+![Physical Diagram](../../.images/03_guided_avionic_project/physical_block_diagram.jpg)
 </details>
 
 ## 4. State Diagram,
