@@ -43,7 +43,7 @@ If you need more tips and hints on each one of these diagrams, you will get them
 
 <details>
   <summary>Hint: Do we have a User?!</summary>
-  The use in our case is the guy who enables/disables monitoring. Wether it is a human (pilot or mechanic) or another system that controls our.
+  The user in our case is the guy who enables/disables monitoring. Wether it is a human (pilot or mechanic) or another system that controls our.
 
 </details>
 
@@ -69,7 +69,8 @@ If you need more tips and hints on each one of these diagrams, you will get them
   <summary>Tip 1!</summary>
   Think of this diagram as "what does he system do?".
 
-- Each functionality is a square with the name in it.
+- The system is a big square, inside of it we put the functionalities,
+- Each functionality is a square with its name in the square.
 - Sub-functionalities should be inside the square of main functionalities.
 - Inputs and outputs of functionalities are shown in thick arrows.
 </details>

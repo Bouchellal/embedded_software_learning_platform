@@ -12,12 +12,9 @@ AEME_PROJECT/
 
 Your task is to write two Python scripts:
 
-<details>
-  <summary>If you do not want to learn Python and Software:</summary>
-  You can read what these script should do, and do it manually.
-</details>
+If you do not want to learn Python and Software: You can read what these script should do, and do it manually.
 
-## 1. `requirement_sanity_checker.py`: 
+## 1. requirement_sanity_checker.py: 
 
 This script will read the requirements from the JSON files and check them against a checklist of criteria to ensure they are well-written.
 
@@ -84,7 +81,7 @@ python requirement_sanity_checker.py ../../01_SYSTEM/01_Development_phase/SES.js
 ```
 
 
-## 2. `traceability_matrix.py`:
+## 2. traceability_matrix.py:
 
 This script will generate a traceability matrix that shows the relationships between System Requirements, Software Requirements, and Test Cases.
 
