@@ -1,5 +1,15 @@
 # Embedded Software Learning Platform
 
+## Presentation
+
+Here you will find the [prerequisite knowledge](./01_prerequisites_knowledge/README.md). Please take your time to learn these basics.
+
+After that, you can start with the [guided avionic project](./03_guided_avionic_project/README.md).
+
+- **You do not need the platform hardware for the first and second chapters. !!**
+
+Before you start the [third chapter](./03_guided_avionic_project/chapter_03/), you will need the hardware platform to be able to do the tasks and exercises. So do the [hands on platform](./02_hands_on_platform/README.md) chapter before starting the third chapter.
+
 ## TL;DR
 
 We, Polytechnique Algiers alumni, built a hardware platform inspired from real life On-board Avionic Product development process and delivered multiple examples in ENP Algiers.
@@ -70,13 +80,3 @@ Hence, the hardware platform that we provide will **not be spectacular**. We int
 - One NVRAM.
 
 At least one of these components should support I2C and SPI protocols.
-
-## Presentation
-
-Here you will find the [prerequisite knowledge](./01_prerequisites_knowledge/README.md). Please take your time to learn these basics.
-
-After that, you can start with the [guided avionic project](./03_guided_avionic_project/README.md).
-
-- **You do not need the platform hardware for the first and second chapters. !!**
-
-Before you start the [third chapter](./03_guided_avionic_project/chapter_03/), you will need the hardware platform to be able to do the tasks and exercises. So do the [hands on platform](./02_hands_on_platform/README.md) chapter before starting the third chapter.
