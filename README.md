@@ -5,14 +5,6 @@
 We, Polytechnique Algiers alumni, built a hardware platform inspired from real life On-board Avionic Product development process and delivered multiple examples in ENP Algiers.
 
 We provide here in this Github repository:
-  - [ ] Links to learn prerequisites embedded software concepts,
-  - [ ] Links to learn development processes,
-  - [ ] A guided project inspired from real-world development process of an Avionic Product,
-  - [ ] A guideline on how to manage the life cycle of a product, with this platform as an example.
-  - [ ] Documentation of the hardware platform:
-    - [ ] Design Documents.
-    - [ ] Maintenance and Auto-Test of the platform.
-    - [ ] Traceability of each individual platform.
 
 ## Introduction
 
@@ -79,44 +71,12 @@ Hence, the hardware platform that we provide will **not be spectacular**. We int
 
 At least one of these components should support I2C and SPI protocols.
 
-## Technical skills to learn
+## Presentation
 
-We will not necessarily provide tutorials and lessons for every technical concept or skill we guide students through. Instead, we provide a set of links to the tutorials and lessons we recommend.
+Here you will find the [prerequisite knowledge](./01_prerequisites_knowledge/README.md). Please take your time to learn these basics.
 
-As software engineers, we are aware that using links to external videos and lessons carries the risk that links become deprecated or content is no longer available.
-Thus, we **invite students** to inform us and **suggest** new links for better content.
+After that, you can start with the [guided avionic project](./03_guided_avionic_project/README.md).
 
-The technical skills we will guide students through are:
+- **You do not need the platform hardware for the first and second chapters. !!**
 
-  - UML / SysML:
-    - [x] How to design and document software/system with diagrams.
-
-  - Version control:
-    - [x] Master git workflow,
-    - [x] Master git precommit.
-
-  - Basic C code:
-    - [x] Structures,
-    - [x] Compilation,
-    - [x] Memory layout (code, data, heap, and stack),
-    - [x] Coding with linters and standards,
-    - [x] Coding critical software.
-
-  - Basic Python:
-    - [x] Object-oriented programming,
-    - [x] Coding with linters and standards.
-
-  - Robot Framework:
-    - [x] Automated testing,
-    - [x] Write your own test steps library for embedded system.
-
-  - Embedded Systems:
-    - [x] Configuring and reading registers,
-    - [x] Understanding PinMux-ing and manually applying it.
-
-  - Linux:
-    - [x] Understanding file system,
-    - [x] Learning basic Linux commands,
-    - [x] Writing shell & bash scripts,
-    - [x] Understanding environment and sourcing,
-    - [x] Bootloader, Device Tree, Kernel, rootFS.
+Before you start the [third chapter](./03_guided_avionic_project/chapter_03/), you will need the hardware platform to be able to do the tasks and exercises. So do the [hands on platform](./02_hands_on_platform/README.md) chapter before starting the third chapter.
