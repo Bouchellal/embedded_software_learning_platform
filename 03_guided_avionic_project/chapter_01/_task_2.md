@@ -14,6 +14,69 @@ Your task is to write two Python scripts:
 
 If you do not want to learn Python and Software: You can read what these script should do, and do it manually.
 
+The python script shall have the following format:
+
+<details>
+  <summary>Click here to show the python script format</summary>
+
+```python
+import json
+import csv
+import sys
+import os
+# ...
+
+REQUIRED_NUMBER_OF_ARGUMENTS = 3
+
+class RequirementSanityChecker:
+    def __init__(self, argument_1=None, argument_2=None, argument_3=None) -> None:
+      """method documentation"""
+      # ...
+      print("init")
+      self.argument_1 = argument_1
+      self.argument_2 = argument_2
+      self.argument_3 = argument_3
+      print(f"argument_1: {self.argument_1}")
+      print(f"argument_2: {self.argument_2}")
+      print(f"argument_3: {self.argument_3}")
+      pass
+
+    def print_usage(self) -> None:
+      """method documentation"""
+      # ...
+      print("usage")
+
+    def check_x(self) -> None:
+      """method documentation"""
+      # ...
+      print("check_x")
+      pass
+
+    def check_y(self) -> None:
+      """method documentation"""
+      # ...
+      print("check_y")
+      pass
+
+
+if len(sys.argv) < REQUIRED_NUMBER_OF_ARGUMENTS:
+    print("Usage: python script_name.py argument_1 argument_2 argument_3")
+    print("Example: ....")
+    sys.exit(1)
+
+if "help" in sys.argv:
+    checker = RequirementSanityChecker()
+    checker.print_usage()
+    sys.exit(0)
+
+checker = RequirementSanityChecker(sys.argv[1], sys.argv[2], sys.argv[3])
+checker.check_x()
+checker.check_y()
+# ...
+```
+
+</details>
+
 ## 1. requirement_sanity_checker.py: 
 
 This script will read the requirements from the JSON files and check them against a checklist of criteria to ensure they are well-written.

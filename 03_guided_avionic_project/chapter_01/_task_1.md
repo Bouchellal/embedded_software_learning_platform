@@ -38,7 +38,7 @@ This is manual work that will help you:
 - Learn how to use the JSON format for requirements and how to read and write JSON files.
 - Learn about requirements that are gonna flowdown to the Software Unit Specification (the ones that have Software allocation).
 
-Once you finish, add your changes and commit them!
+Once you finish, add your changes and commit them! Open GitBash in the root of the folder and run the following commands:
 
 ```shell
 git status
@@ -101,23 +101,53 @@ A requirement is more than just a sentence; it is a database entry. In tools lik
 
 ## Criteria 3: The Semantics of Requirements
 
-In aerospace, word choice is a legal obligation, not a stylistic preference. We use specific "modal verbs" to define the weight of a statement.
+In requirement writing, word choice is a legal obligation, not a stylistic preference. We use specific "modal verbs" to define the weight of a statement.
 
-#### The "Shall" (Mandatory)
+### The requirements should not describe implementation details, but rather the behavior
+
+What the requirement should describe:
+
+- The required behavior or characteristic of the system
+- The expected result, output, or condition
+- The constraints and performance needed
+
+What it should not describe:
+
+- internal design decisions
+- algorithms, code structure, or implementation methods
+- specific technology choices
+
+Example:
+
+- Poor requirement:
+  - "The software shall use a round-robin scheduler to process sensor data."
+  - This is implementation detail.
+
+- Better requirement:
+  - "The software shall process each sensor sample within 10 ms of arrival."
+  - This describes behavior and is testable.
+
+Why this matters:
+
+- Behavior-focused requirements are easier to verify
+- They leave design choices open to engineers
+- They reduce duplication and avoid locking the solution too early
+
+### The "Shall" (Mandatory)
 The word "Shall" is the only word used for a binding requirement.
 
 Semantic: "The System shall disconnect the autopilot when the pilot applies 10lbs of force to the yoke."
 
 Meaning: If this doesn't happen 100% of the time, the system is a failure.
 
-#### The "Shall Not" (Constraints)
+### The "Shall Not" (Constraints)
 Used for safety-critical prohibitions.
 
 Semantic: "The System shall not deploy the thrust reversers while the aircraft is in 'In-Air' mode."
 
 Meaning: This is a "negative requirement" used to prevent catastrophic states.
 
-#### Non-Binding Semantics (Avoid these in Requirements!)
+### Non-Binding Semantics (Avoid these in Requirements!)
 
 Should/May: Suggests a preference or optional feature. These have no place in a DO-178C requirement because they are not "verifiable."
 

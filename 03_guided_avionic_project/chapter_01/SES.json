@@ -277,5 +277,14 @@
     "parent": "",
     "allocation": "Software",
     "variant": "current"
+  },
+  {
+    "identifier": "AEME-SYS-0032",
+    "title": "Condition to enter CLI configuration mode",
+    "text": "The system shall only enter CLI configuration mode when the following conditions are met: 1) Reception of any characters on configuration UART port within 5 seconds of power-up, 2) STANDBY_PIN is asserted to GND level.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "Software",
+    "variant": "current"
   }
 ]
