@@ -254,40 +254,20 @@ python3 hello_world.py
 
 ## Blinky
 
-Now, let's make the three LEDs connected to the raspberry pi blink. To do this, we will use the gpiod library.
+Modern Raspberry Pi OS versions (Debian 12 Bookworm, Debian 13 Trixie, and newer) have moved away from `pigpio` because it is incompatible with newer hardware like the Raspberry Pi 5. Instead, we use `lgpio`, which interacts directly with the standard Linux kernel GPIO interface and works seamlessly across all Raspberry Pi models.
 
-Setting up pigpio is a smart move. While the standard RPi.GPIO library is fine for basic tasks, pigpio is the "gold standard" for precision. It uses DMA (Direct Memory Access) to handle timing, which means you get hardware-accurate PWM and way less jitter when controlling servos or reading high-speed sensors.
+## Step 1: Install the Required Tools
 
-Since you're using a Raspberry Pi Model B (the classic 26-pin version), pigpio works perfectly, though you'll have fewer pins to play with than the modern 40-pin models.
+Modern Raspberry Pi OS versions (Debian 12, Debian 13, and newer) use `gpiozero` as the standard, recommended library for controlling hardware components. It is simple, highly readable, and runs safely on top of the modern Linux kernel GPIO interface.
 
-Most modern Raspberry Pi OS versions include pigpio by default, but it's always good to ensure you have the latest version and the Python headers.
+### Step 1: Install the Required Tools
 
-Open your terminal and run:
+Open your terminal and install `gpiozero` along with its modern backend (`lgpio`):
 
-```Bash
-which pigpiod
-```
-If it returns a path, pigpio is installed. If not, you can install it with:
-
-```Bash
+```bash
 sudo apt update
-sudo apt install pigpio python3-pigpio
+sudo apt install python3-gpiozero python3-lgpio
 ```
-
-Now, you can start the pigpio daemon, which is necessary for the library to work:
-
-```Bash
-sudo pigpiod
-```
-
-To make it start automatically every time the Pi boots:
-
-```Bash
-sudo systemctl enable pigpiod
-sudo systemctl start pigpiod
-```
-
-Now, you can create a Python script to blink the LEDs. Here's an example script that blinks the three LEDs connected to GPIO pins X, Y, and Z (replace these with the actual GPIO pin numbers, visually identify the pins connected to the LEDs on your Raspberry Pi, for example, GPIO 29, GPIO 31, and GPIO 37):
 
 Use nano as text editor to create the script. run this command in the terminal:
 
@@ -298,44 +278,33 @@ nano blink_leds.py
 Then, add the following code to the script (copy this script and paste it into the nano editor using right-click or ctrl+shift+v):
 
 ```python
-import time
-import pigpio
-
-# Connect to the local raspberry pi
-pi = pigpio.pi()
-
-if not pi.connected:
-    print("Failed to connect to pigpio daemon. Make sure pigpiod is running.")
-    exit()
-
-# Define the pin (using BCM numbering)
-GREEN_LED_PIN = 29
-RED_LED_PIN = 31
-YELLOW_LED_PIN = 37
-
-# Set pin mode to output
-pi.set_mode(GREEN_LED_PIN, pigpio.OUTPUT)
-pi.set_mode(RED_LED_PIN, pigpio.OUTPUT)
-pi.set_mode(YELLOW_LED_PIN, pigpio.OUTPUT)
+from gpiozero import LED
+from time import sleep
 
 try:
-    print("Blinking LED... Press Ctrl+C to stop.")
+    # Initialize the LEDs using Physical Header Pin numbers
+    green_led  = LED("BOARD29") 
+    red_led    = LED("BOARD31")
+    yellow_led = LED("BOARD37")
+
+    print("Blinking LEDs... Press Ctrl+C to stop.")
+    
     while True:
-        pi.write(GREEN_LED_PIN, 1) # ON
-        pi.write(RED_LED_PIN, 1) # ON
-        pi.write(YELLOW_LED_PIN, 1) # ON
-        time.sleep(0.5)
-        pi.write(GREEN_LED_PIN, 0) # OFF
-        pi.write(RED_LED_PIN, 0) # OFF
-        pi.write(YELLOW_LED_PIN, 0) # OFF
-        time.sleep(0.5)
+        # Turn all LEDs ON
+        green_led.on()
+        red_led.on()
+        yellow_led.on()
+        sleep(0.5)
+
+        # Turn all LEDs OFF
+        green_led.off()
+        red_led.off()
+        yellow_led.off()
+        sleep(0.5)
 
 except KeyboardInterrupt:
-    print("\nCleaning up...")
-    pi.write(GREEN_LED_PIN, 0) # Turn off LED
-    pi.write(RED_LED_PIN, 0) # Turn off LED
-    pi.write(YELLOW_LED_PIN, 0) # Turn off LED
-    pi.stop()            # Disconnect from the daemon
+    print("\nExiting and cleaning up...")
+    # gpiozero automatically turns off the pins safely when the script ends!
 ```
 
 Save the file and exit nano (Ctrl+S, then Ctrl+X).
