@@ -136,12 +136,93 @@ ip a
 ```
 You should see an IP address assigned to the Wi-Fi interface (usually `wlan0`).
 
+## Overview of the network configuration
+
+So, your PC is connected to the Raspberry Pi via:
+- Ethernet cable (for initial setup and maintenance)
+- Wi-Fi (for normal operation)
+
+Here is a diagram that shows the network configuration:
+- On Raspberry Pi terminal, run "ip a" command to see the IP addresses of the Ethernet and Wi-Fi interfaces.
+- On you PC, run "ipconfig" command on Windows or "ip a" command on Linux to see the IP address of your Ethernet interface.
+
+Take your time to understand the network configuration and how the Raspberry Pi is connected to your PC and to the Wi-Fi network.
+
+![network map](../.images/02_hands_on_platform/hands_on_network_map.jpg)
+
 ## Connect to the Raspberry Pi using Wi-Fi
 
 Use the Raspberry Pi's Wi-Fi IP address to connect to it using SSH, just like you did with the Ethernet connection. In a whole new terminal / putty.
 
-Once you connected to the Raspberry Pi using Wi-Fi, you can disconnect the Ethernet cable and continue working with the Raspberry Pi over Wi-Fi.
+In the example above, the Wi-Fi IP address of the Raspberry Pi is `10.112.199.12`, so you can connect to it using the following command:
 
+<details>
+<summary><strong>Linux</strong></summary>
+
+```bash
+ssh sadaka_jariya@10.112.199.12
+```
+</details>
+
+<details>
+<summary><strong>Windows (using PuTTY)</strong></summary>
+
+1. Open PuTTY.
+2. Enter "Hostname (or IP address)": `sadaka_jariya@10.112.199.12`
+3. Click "Open" to start the SSH session.
+</details>
+
+## Unplug the Ethernet cable  !!!!!
+
+To avoid confusing the Linux of the Raspberry Pi, close the SSH window opened using the Ethernet connection (IP 192.168.1.100 in the example), then unplug the Ethernet cable from the Raspberry Pi and make sure that you can still connect to it using Wi-Fi.
+
+<details>
+<summary><strong>If you want to keep the Ethernet cable connected</strong></summary>
+You can configure the Raspberry Pi to use the Wi-Fi connection as the default route for internet access. This way, the Raspberry Pi will use the Wi-Fi connection for internet access and the Ethernet connection for local network access.
+
+```bash
+sudo nmcli device modify eth0 ipv4.route-metric 800
+sudo nmcli device modify wlan0 ipv4.route-metric 600
+```
+
+Run the following command to check the routing table and make sure that the Wi-Fi connection is the default route:
+```bash
+ip route
+```
+
+You should get something like this:
+```bash
+sadaka_jariya@lapointe:~ $ ip route
+default via 10.112.199.226 dev wlan0 proto dhcp src 10.112.199.12 metric 600
+default via 192.168.1.1 dev eth0 proto static metric 800
+10.112.199.0/24 dev wlan0 proto kernel scope link src 10.112.199.12 metric 600
+192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.100 metric 800
+```
+
+The route metric represents the priority of the route. The lower the metric, the higher the priority. In this case, the Wi-Fi connection has a lower metric (600) than the Ethernet connection (800), so it will be used as the default route for internet access.
+</details>
+
+## Test internet connection
+
+Let's test the internet connection on the Raspberry Pi by pinging a public server. Run the following command:
+
+```bash
+ping 8.8.8.8
+```
+
+The IP 8.8.8.8 is a public DNS server that is commonly used for testing internet connectivity.
+
+It should return something like this:
+
+```bash
+sadaka_jariya@lapointe:~ $ ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=117 time=81.2 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=117 time=24.1 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=117 time=52.1 ms
+```
+
+Press Ctrl+C to stop the ping command.
 
 ## First Linux commands
 
