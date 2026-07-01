@@ -51,6 +51,7 @@ dns=1.1.1.1;8.8.8.8;
 
 [ipv6]
 method=disabled
+
 ```
 
 To exit nano editor, click ctrl+s to save then ctrl+x to exit.
