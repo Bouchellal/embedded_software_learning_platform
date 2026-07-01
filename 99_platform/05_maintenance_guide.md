@@ -30,10 +30,10 @@
 - Run the following command from the terminal:
 
 ```bash
-etc/NetworkManager/system-connections/eth0.nmconnection
+sudo nano etc/NetworkManager/system-connections/eth0.nmconnection
 ```
 
-- Copy the following content into the file:
+- Copy the following content into the file: (ctrl shift v)
 
 ```yaml
 [connection]
@@ -53,10 +53,12 @@ dns=1.1.1.1;8.8.8.8;
 method=disabled
 ```
 
+To exit nano editor, click ctrl+s to save then ctrl+x to exit.
+
 - Run the following command to grant the necessary permissions to the file:
 
 ```bash
-chmod 600 /etc/NetworkManager/system-connections/eth0.nmconnection
+sudo chmod 600 etc/NetworkManager/system-connections/eth0.nmconnection
 ```
 
 - Eject the SD card and insert it into the Raspberry Pi.
