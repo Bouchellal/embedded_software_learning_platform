@@ -224,6 +224,46 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 
 Press Ctrl+C to stop the ping command.
 
+## Next Time You Try To Connect to the Raspberry Pi
+
+Next time you want to connect to the Raspberry Pi, you will have to do the same thing!
+
+Here is a summary of the steps with the debug procedure to confirm that each step has worked:
+
+1. Power off Raspberry Pi
+   - Verification that the Raspberry Pi is off: Raspberry Pi red and green LEDs are off.
+2. Connect the Ethernet cable between your computer and the Raspberry Pi.
+3. Open Wireshark as administrator and start capturing on the Ethernet interface that is connected to the Raspberry Pi.
+4. Power on the Raspberry Pi.
+   - Verification is getting enough power: You should see the red LED on the Raspberry Pi turn on (should not be blinking)
+   - Verification the Raspberry Pi is booting: You should see the green LED on the Raspberry Pi blinking.
+   - Verification the Raspberry Pi is connected to the network: You should see an ARP request from the Raspberry Pi in Wireshark.
+5. Configure your computer to be in the same subnet as the Raspberry Pi.
+   - Verification that your PC can reach the Raspberry Pi via the ethernet network: You should be able to ping the Raspberry Pi from your computer.
+6. Connect to the Raspberry Pi using SSH.
+   - Verification that you can connect to the Raspberry Pi via SSH: You should be able to log in to the Raspberry Pi and see the command prompt.
+7. Connect the Raspberry Pi to Wi-Fi.
+   - Verification that the Raspberry Pi is connected to the Wi-Fi network: You should be able to ping the Raspberry Pi from your computer using its Wi-Fi IP address.
+8. Connect to the Raspberry Pi via SSH using its Wi-Fi IP address.
+   - Verification that you can connect to the Raspberry Pi via SSH using its Wi-Fi IP address: You should be able to log in to the Raspberry Pi and see the command prompt.
+9. Unplug the Ethernet cable from the Raspberry Pi.
+10. Test the internet connection on the Raspberry Pi.
+   - Verification that the Raspberry Pi has internet access: You should be able to ping a public server (e.g. `8.8.8.8`) from the Raspberry Pi and get a response.
+
+## Debugging Universal Strategy
+
+The universal strategy for debugging is to draw the chain of responsibility and check each block and link.
+
+For example, let's draw the chain of responsibility for the Raspberry Pi to connect to the PC:
+
+![Chain of Responsibility](../.images/02_hands_on_platform/chain_of_responsability.jpg)
+
+Each block needs to be verified.
+
+Each arrow represents a link that needs to be tested.
+
+**When things don't work, stop, draw the chain, and check each block and link to find the problem.**
+
 ## First Linux commands
 
 Update the apt package manager and install some useful tools:
