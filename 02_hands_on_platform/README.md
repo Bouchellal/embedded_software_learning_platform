@@ -464,8 +464,16 @@ And it should work and the LED should start blinking.
 
 ## Exercise
 
-You can have fun exploring the platform and trying to do more complex things with it, things that will be needed later in the guided projects. For example, you can try to:
-- Configure two GPIO pins between the Raspberry Pi and the STM32 Nucleo board and control their state from the Raspberry Pi to the STM32 Nucleo board and the other way around.
-  - Raspberry Pi --> Nucleo
-  - Nucleo --> Raspberry Pi
-- Configure the UART peripheral of the STM32 Nucleo board and send data from the Raspberry Pi to the STM32 Nucleo board using UART communication.
+Let's create an auto-test pipeline that test all connections of the STM32 and Raspberry Pi:
+
+Easiest and most important:
+
+- GPIOs from STM32 to Raspberry Pi,
+- UART from STM32 to Raspberry Pi,
+
+In second priority:
+- I2C from STM32 to ADC,
+- SPI from STM32 to FRAM,
+- I2C from Raspberry Pi to DAC.
+
+Here is the page for the guided exercise: [Auto-Test Pipeline](auto_test.md)
