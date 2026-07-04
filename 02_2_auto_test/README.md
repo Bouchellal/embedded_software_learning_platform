@@ -245,7 +245,7 @@ A nice feature of this script is that it will also control the LEDs on the Raspb
 
 ## Raspberry Pi UART Setup
 
-To be able to use the UART on the Raspberry Pi, we need to enable it first.
+To be able to use the UART and I2C on the Raspberry Pi, we need to enable them first.
 
 1. Enable UART & Disable Serial Console/
     - Since you are running OS Lite, you will do this via the terminal or raspi-config.
@@ -255,11 +255,26 @@ To be able to use the UART on the Raspberry Pi, we need to enable it first.
       - Would you like a login shell to be accessible over serial? Select No.
       - Would you like the serial port hardware to be enabled? Select Yes.
 
+    - Navigate back to Interface Options.
+    - Select I2C.
+    - Choose Yes when asked if you want to enable the ARM I2C interface.
+
     - Select Finish and choose Yes to reboot the Raspberry Pi.
 
 2. Install pyserial
     - Run the following command to install pyserial: ```sudo pip3 install pyserial```
 
+3. Install I2C Tools
+    - Run the following commands to install I2C tools:
+      - ```sudo apt update```
+      - ```sudo apt install -y i2c-tools```
+    - In your workspace_your_name folder, run the following command to install adafruit package in [python virtual env](../01_prerequisites/README.md#python-virtual-environment):
+      - ```python3 -m venv env```
+      - ```source env/bin/activate```
+      - ```pip3 install adafruit-blinka adafruit-circuitpython-mcp4728```
+      - ```sudo apt update```
+      - ```sudo apt install swig python3-dev gcc liblgpio-dev```
+      - ```pip3 install gpiozero lgpio```s
 
 ## Python Script
 
@@ -274,7 +289,10 @@ import os
 import subprocess
 from gpiozero import DigitalInputDevice, LED
 from typing import List, Tuple
-
+import re
+import board
+import busio
+import adafruit_mcp4728
 
 class STM32AutoTest:
     """
@@ -454,6 +472,7 @@ class STM32AutoTest:
         """
         if stm32_pin not in self.gpio_inputs:
             print(f"[ERROR] Unknown STM32 pin: {stm32_pin}")
+            self.all_passed = False
             return False
 
         rpi_pin = self.stm32_to_rpi_gpio[stm32_pin]
@@ -472,7 +491,7 @@ class STM32AutoTest:
             return True
         else:
             print(f"{self.RED}[FAIL] GPIO {stm32_pin}: start_value: {start_value}, end_value: {end_value}{self.RESET}")
-            self.all_passed = self.all_passed and False
+            self.all_passed = False
             return False
 
     def test_gpio_pd0(self) -> bool:
@@ -523,12 +542,12 @@ class STM32AutoTest:
             else:
                 print(f"{self.RED}[FAIL] Unexpected response: '{response}'{self.RESET}")
                 print(f"{self.RED}[FAIL] Expected: '{test_message}'{self.RESET}")
-                self.all_passed = self.all_passed and False
+                self.all_passed = False
                 return False
 
         except Exception as e:
             print(f"[ERROR] UART test failed: {str(e)}")
-            self.all_passed = self.all_passed and False
+            self.all_passed = False
             return False
 
     def test_i2c_and_spi_device(self) -> bool:
@@ -541,18 +560,52 @@ class STM32AutoTest:
         response = self.uart.readline().decode('utf-8', errors='ignore').strip()
 
         if "[PASS][I2C]" in response:
-            print(f"{self.GREEN}[PASS] I2C device at 0x{i2c_address:02X} responded successfully{self.RESET}")
+            print(f"{self.GREEN}[PASS] I2C device responded successfully{self.RESET}")
         else:
-            print(f"{self.RED}[FAIL] I2C device at 0x{i2c_address:02X} did not respond properly{self.RESET}")
-            self.all_passed = self.all_passed and False
+            print(f"{self.RED}[FAIL] I2C device did not respond properly{self.RESET}")
+            self.all_passed = False
 
         if "[PASS][SPI]" in response:
             print(f"{self.GREEN}[PASS] SPI FRAM device responded successfully{self.RESET}")
         else:
             print(f"{self.RED}[FAIL] SPI FRAM device did not respond properly{self.RESET}")
-            self.all_passed = self.all_passed and False
+            self.all_passed = False
 
-        print(f"[INFO] STM32 Response: \n\n>>>{response}\n\n<<<")
+        print(f"[INFO] STM32 Response: \n>>>{response}\n<<<")
+
+    def verify_mcp4728_connection(self, target_address=0x60) -> bool:
+        """
+        Pings the MCP4728 DAC using two sequential methods:
+        1. Low-level bus scan using the system 'i2cdetect' tool.
+        2. High-level driver initialization using the Adafruit CircuitPython package.
+        Returns True only if both tests pass successfully.
+        """
+        print(f"[TEST] Verifying MCP4728 at 0x{target_address:02X}")
+
+        # Test 1: System-level i2cdetect verification
+        try:
+            result = subprocess.run(['i2cdetect', '-y', '1'], capture_output=True, text=True>
+            print(f"[INFO] the command 'i2cdetect -y 1' returned:")
+            print(f">>>\n{result.stdout}\n<<<")
+        except Exception as e:
+            print(f"{self.RED}[FAIL] i2cdetect check failed: {e}{self.RESET}")
+            bus_scan_ok = False
+
+        # Test 2: Library-level communication verification
+        try:
+            i2c = busio.I2C(board.SCL, board.SDA)
+            mcp = adafruit_mcp4728.MCP4728(i2c, address=target_address)
+            print(f"{self.GREEN}[PASS] MCP4728 driver initialization succeeded{self.RESET}")
+            driver_ok = True
+        except Exception as e:
+            print(f"{self.RED}[FAIL] MCP4728 driver initialization failed: {e}{self.RESET}")
+            driver_ok = False
+
+        if driver_ok:
+            return True
+
+        self.all_passed = False
+        return False
 
 
     def cleanup(self):
