@@ -30,11 +30,71 @@ For each interface, we will send a message and wait for a response. If the respo
 - Or the auto test script is not working properly.
 
 ```C
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+#define RX_BUFFER_SIZE 256
+
+#define ADS1015_ADDR (0x48 << 1)
+
+// Define your custom Chip Select pin
+#define FRAM_CS_GPIO_Port  GPIOA
+#define FRAM_CS_Pin        GPIO_PIN_1
+// MB85RS64 Op-codes
+#define CMD_RDID           0x9F  // Read Device ID command
+// Macro to toggle CS pin easily
+#define FRAM_CS_LOW()      HAL_GPIO_WritePin(FRAM_CS_GPIO_Port, FRAM_CS_Pin, GPIO_PIN_RESET)
+#define FRAM_CS_HIGH()     HAL_GPIO_WritePin(FRAM_CS_GPIO_Port, FRAM_CS_Pin, GPIO_PIN_SET)
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+
+SPI_HandleTypeDef hspi2;
+
+UART_HandleTypeDef huart1;
+
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_SPI2_Init(void);
+static void MX_USART1_UART_Init(void);
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  uint8_t rxBuffer[RX_BUFFER_SIZE];
+  uint16_t bytesReceived = 0;
+  HAL_StatusTypeDef status;
+  char errorBuffer[RX_BUFFER_SIZE];
+  int msgLength;
+  HAL_StatusTypeDef ret;
+  uint8_t command = CMD_RDID;
+  uint8_t rx_buffer[4] = {0};
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -86,47 +146,71 @@ int main(void)
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_RESET);
   /* ----------- TEST GPIO END ---------- */
 
-
-
   /* ----------- TEST USART ---------- */
-	uint8_t rxBuffer[RX_BUFFER_SIZE]; // The buffer to store incoming data
-	uint16_t bytesReceived = 0;       // This will track exactly how many bytes we got
+  // Clear out the buffer before receiving new data
+  memset(rxBuffer, 0, RX_BUFFER_SIZE);
+  bytesReceived = 0;
 
-	// Clear out the buffer before receiving new data
-    memset(rxBuffer, 0, RX_BUFFER_SIZE);
-    bytesReceived = 0;
+  status = HAL_UARTEx_ReceiveToIdle(&huart1, rxBuffer, RX_BUFFER_SIZE, &bytesReceived, 2000);
+  if (status == HAL_OK && bytesReceived > 0)
+  {
+    // Transmit back exactly what we received
+    HAL_UART_Transmit(&huart1, rxBuffer, bytesReceived, 500);
+  }
+  else if (status == HAL_TIMEOUT)
+  {
+    msgLength = sprintf(errorBuffer, "\r\n[FAIL][USART] HAL_Status: %d, BytesRx: %d\r\n", status, bytesReceived);
+    HAL_UART_Transmit(&huart1, (uint8_t*)errorBuffer, msgLength, 500);
+  }
+  /* ----------- TEST USART END ---------- */
 
-    /* * 3. Call the Receive To Idle function
-     * Arguments:
-     * &huart1       -> Pointer to your UART configuration handle
-     * rxBuffer      -> Where to store the incoming bytes
-     * RX_BUFFER_SIZE-> The absolute maximum bytes we are willing to take
-     * &bytesReceived-> Variable that the function updates with the actual count
-     * 2000          -> Timeout in milliseconds (2 seconds)
-     */
-    HAL_StatusTypeDef status = HAL_UARTEx_ReceiveToIdle(&huart1, rxBuffer, RX_BUFFER_SIZE, &bytesReceived, 2000);
-    if (status == HAL_OK && bytesReceived > 0)
-        {
-            // Transmit back exactly what we received
-            // We use a 500ms timeout for the transmission
-            HAL_UART_Transmit(&huart1, rxBuffer, bytesReceived, 500);
-        }
-        // Optional: handle what happens if it hits the 2-second timeout without any data
-        else if (status == HAL_TIMEOUT)
-        {
-            // 2 seconds passed, no data came in or the packet was incomplete
-        	char errorBuffer[64];
+  /* ----------- TEST I2C Device ---------- */
+  ret = HAL_I2C_IsDeviceReady(&hi2c1, ADS1015_ADDR, 5, 100);
+  if(HAL_OK == ret)
+  {
+    msgLength = sprintf(errorBuffer, "\r\n[PASS][I2C] device: %d responded to HAL_I2C_IsDeviceReady, returned %d (HAL_OK=0, HAL_ERROR=1, HAL_BUSY=2, HAL_TIMEOUT=3)\r\n", ADS1015_ADDR >> 1, ret);
+    HAL_UART_Transmit(&huart1, (uint8_t*)errorBuffer, msgLength, 500);
+  }
+  else
+  {
+    msgLength = sprintf(errorBuffer, "\r\n[FAIL][I2C] device: %d did not responded to HAL_I2C_IsDeviceReady, returned %d (HAL_OK=0, HAL_ERROR=1, HAL_BUSY=2, HAL_TIMEOUT=3)\r\n", ADS1015_ADDR >> 1, ret);
+    HAL_UART_Transmit(&huart1, (uint8_t*)errorBuffer, msgLength, 500);
+  }
+  /* ----------- TEST I2C Device END ---------- */
 
-			/* Format the error message.
-			 * Note: HAL Status values are:
-			 * 0 = HAL_OK, 1 = HAL_ERROR, 2 = HAL_BUSY, 3 = HAL_TIMEOUT
-			 */
-			int msgLength = sprintf(errorBuffer, "\r\n[FAIL] HAL_Status: %d, BytesRx: %d\r\n", status, bytesReceived);
+  /* ----------- TEST SPI Device ---------- */
+  // 1. Ensure CS starts high
+  FRAM_CS_HIGH();
+  HAL_Delay(5);
 
-			// Send the error message back over UART
-			HAL_UART_Transmit(&huart1, (uint8_t*)errorBuffer, msgLength, 500);
-        }
-    /* ----------- TEST USART END ---------- */
+  // 2. Drop CS low to select the FRAM chip
+  FRAM_CS_LOW();
+
+  // 3. Transmit the 1-byte Read ID command
+  HAL_SPI_Transmit(&hspi2, &command, 1, HAL_MAX_DELAY);
+
+  // 4. Clock out 4 bytes to read the incoming ID signature
+  HAL_SPI_Receive(&hspi2, rx_buffer, 4, HAL_MAX_DELAY);
+
+  // 5. Pull CS high to end the SPI frame transaction
+  FRAM_CS_HIGH();
+
+  // Debug print out what we actually caught on the line
+  msgLength = sprintf(errorBuffer, "[INFO][SPI] FRAM Response ID: %02X %02X %02X %02X\r\n", rx_buffer[0], rx_buffer[1], rx_buffer[2], rx_buffer[3]);
+  HAL_UART_Transmit(&huart1, (uint8_t*)errorBuffer, msgLength, 500);
+
+  // 6. Verify against the official Fujitsu MB85RS64 ID pattern
+  if (rx_buffer[0] == 0x04 && rx_buffer[2] == 0x03 && rx_buffer[3] == 0x02)
+  {
+    msgLength = sprintf(errorBuffer, "[PASS][SPI] FRAM connected and verified successfully!\r\n");
+    HAL_UART_Transmit(&huart1, (uint8_t*)errorBuffer, msgLength, 500);
+  }
+  else
+  {
+    msgLength = sprintf(errorBuffer, "[FAIL][SPI] FRAM Ping failed! Check your SPI wiring or logic levels.\r\n");
+    HAL_UART_Transmit(&huart1, (uint8_t*)errorBuffer, msgLength, 500);
+  }
+  /* ----------- TEST SPI Device END ---------- */
 
 
   /* USER CODE END 2 */
@@ -136,14 +220,16 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	/* Toggle the state of PA5 */
-	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-	/* Insert a delay of 500ms */
-	HAL_Delay(500);
+    /* Toggle the state of PA5 */
+    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+    /* Insert a delay of 500ms */
+    HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
+
   /* USER CODE END 3 */
 }
+
 ```
 
 
@@ -212,6 +298,7 @@ class STM32AutoTest:
         self.uart_port = uart_port
         self.uart_baudrate = uart_baudrate
         self.uart = None
+        self.all_passed = True  # Track overall test status
 
         # GPIO mapping: STM32 pin name -> RPi BOARD pin number
         # To be configured by user using set_gpio_mapping()
@@ -385,6 +472,7 @@ class STM32AutoTest:
             return True
         else:
             print(f"{self.RED}[FAIL] GPIO {stm32_pin}: start_value: {start_value}, end_value: {end_value}{self.RESET}")
+            self.all_passed = self.all_passed and False
             return False
 
     def test_gpio_pd0(self) -> bool:
@@ -435,11 +523,37 @@ class STM32AutoTest:
             else:
                 print(f"{self.RED}[FAIL] Unexpected response: '{response}'{self.RESET}")
                 print(f"{self.RED}[FAIL] Expected: '{test_message}'{self.RESET}")
+                self.all_passed = self.all_passed and False
                 return False
 
         except Exception as e:
             print(f"[ERROR] UART test failed: {str(e)}")
+            self.all_passed = self.all_passed and False
             return False
+
+    def test_i2c_and_spi_device(self) -> bool:
+        """
+        Test I2C and SPI communication by checking if the devices respond.
+        Returns:
+            True if both tests passed, False otherwise
+        """
+        print(f"[TEST] Testing I2C and SPI Devices")
+        response = self.uart.readline().decode('utf-8', errors='ignore').strip()
+
+        if "[PASS][I2C]" in response:
+            print(f"{self.GREEN}[PASS] I2C device at 0x{i2c_address:02X} responded successfully{self.RESET}")
+        else:
+            print(f"{self.RED}[FAIL] I2C device at 0x{i2c_address:02X} did not respond properly{self.RESET}")
+            self.all_passed = self.all_passed and False
+
+        if "[PASS][SPI]" in response:
+            print(f"{self.GREEN}[PASS] SPI FRAM device responded successfully{self.RESET}")
+        else:
+            print(f"{self.RED}[FAIL] SPI FRAM device did not respond properly{self.RESET}")
+            self.all_passed = self.all_passed and False
+
+        print(f"[INFO] STM32 Response: \n\n>>>{response}\n\n<<<")
+
 
     def cleanup(self):
         """Close UART connection and cleanup GPIO resources."""
@@ -475,34 +589,37 @@ class STM32AutoTest:
 
         # Initialize peripherals
         if not self.initialize_gpio():
+            self.show_fail_state()
             return False
 
         if not self.initialize_uart():
+            self.show_fail_state()
             return False
 
         # Flash STM32
         if not self.flash_stm32():
+            self.show_fail_state()
             return False
 
         self.show_testing_state()
-
-        all_passed = True
 
         self.test_gpio_pd0()
         self.test_gpio_pd3()
         self.test_gpio_pd4()
         self.test_gpio_pc14()
 
-        all_passed = all_passed and self.test_uart()
+        self.test_uart()
 
-        if all_passed:
+        self.test_i2c_and_spi_device()
+
+        if self.all_passed:
             self.show_pass_state()
         else:
             self.show_fail_state()
 
         self.cleanup()
 
-        return all_passed
+        return self.all_passed
 
 
 
