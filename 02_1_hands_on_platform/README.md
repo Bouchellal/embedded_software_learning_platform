@@ -476,4 +476,4 @@ In second priority:
 - SPI from STM32 to FRAM,
 - I2C from Raspberry Pi to DAC.
 
-Here is the page for the guided exercise: [Auto-Test Pipeline](auto_test.md)
+Here is the page for the guided exercise: [Auto-Test](../02_2_auto_test/README.md)
