@@ -8,7 +8,7 @@ After that, you can start with the [guided avionic project](./03_guided_avionic_
 
 - **You do not need the platform hardware for the first and second chapters. !!**
 
-Before you start the [third chapter](./03_guided_avionic_project/chapter_03/), you will need the hardware platform to be able to do the tasks and exercises. So do the [hands on platform](./02_hands_on_platform/README.md) chapter before starting the third chapter.
+Before you start the [third chapter](./03_guided_avionic_project/chapter_03/), you will need the hardware platform to be able to do the tasks and exercises. So do the [hands on platform](./02_1_hands_on_platform/README.md) chapter before starting the third chapter.
 
 ## TL;DR
 

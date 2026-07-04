@@ -64,6 +64,6 @@ sudo chmod 600 etc/NetworkManager/system-connections/eth0.nmconnection
 
 - Eject the SD card and insert it into the Raspberry Pi.
 - Power on the Raspberry Pi and wait for it to boot up.
-- Test the connection by following the [Hands On Guide](../02_hands_on_platform/README.md).
+- Test the connection by following the [Hands On Guide](../02_1_hands_on_platform/README.md).
 
 </details>
