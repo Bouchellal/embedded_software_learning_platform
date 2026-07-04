@@ -268,9 +268,9 @@ To be able to use the UART and I2C on the Raspberry Pi, we need to enable them f
     - Run the following commands to install I2C tools:
       - ```sudo apt update```
       - ```sudo apt install -y i2c-tools```
-    - In your workspace_your_name folder, run the following command to install adafruit package in [python virtual env](../01_prerequisites/README.md#python-virtual-environment):
+    - In your workspace_your_name folder, run the following command to install adafruit package in [python virtual env](../01_prerequisites_knowledge/README.md):
       - ```python3 -m venv env```
-      - ```source env/bin/activate```
+      - ```source env/bin/activate```   (**From now on, use this python virtual environment, run this command from your workspace every time you open a new terminal**)
       - ```pip3 install adafruit-blinka adafruit-circuitpython-mcp4728```
       - ```sudo apt update```
       - ```sudo apt install swig python3-dev gcc liblgpio-dev```
