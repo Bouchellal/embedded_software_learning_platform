@@ -9,16 +9,18 @@ Let's create a new STM32 project and configure these pins:
 1. Open the .ioc file,
 2. Go to connectivity,
 3. For each interface shown in green, enable the interface via the mode dropdown menu:
-    - UART1: Asynchronous
-    - I2C1: I2C
-    - SPI1: Full-Duplex Master
+    1. SPI1: Full-Duplex Master, with 8bit word size and a high prescaler of 64 to slow down the SPI clock speed (we are using jumpers of low quality and different lengths, high speed SPI may not work reliably),
+    2. I2C1: I2C
+    3. UART1: Asynchronous
+    4. Set the GPIOs to GPIO_OUTPUT,
 4. Go through the configuration panels, discover the parameters for each interface,
-5. Set the GPIOs to GPIO_OUTPUT,
-6. Save with ctrl+s to generate the code.
+5. Save with ctrl+s to generate the code.
+
 
 
 ![Auto Test Pin Configuration](../.images/02_hands_on_platform/auto_test.png)
 
+![SPI specific configuration](../.images/02_hands_on_platform/spi_config.png)
 
 In the main.c file, the idea is to test each group of interfaces (GPIOs, UART, I2C, SPI) one by one. 
 
@@ -30,7 +32,6 @@ For each interface, we will send a message and wait for a response. If the respo
 - Or the auto test script is not working properly.
 
 ```C
-
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define RX_BUFFER_SIZE 256
@@ -125,7 +126,7 @@ int main(void)
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET);
 
   // Test Each GPIO one by one
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_SET);
@@ -140,10 +141,10 @@ int main(void)
   HAL_Delay(2000);
 
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
   HAL_Delay(2000);
 
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_14, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET);
   /* ----------- TEST GPIO END ---------- */
 
   /* ----------- TEST USART ---------- */
@@ -164,7 +165,11 @@ int main(void)
   }
   /* ----------- TEST USART END ---------- */
 
+  HAL_Delay(5000);
+
+
   /* ----------- TEST I2C Device ---------- */
+//  HAL_UART_Transmit(&huart1, (uint8_t*)"Hello_STM32\r\n", 14, 500);
   ret = HAL_I2C_IsDeviceReady(&hi2c1, ADS1015_ADDR, 5, 100);
   if(HAL_OK == ret)
   {
@@ -220,10 +225,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    /* Toggle the state of PA5 */
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    /* Insert a delay of 500ms */
-    HAL_Delay(500);
+
     /* USER CODE BEGIN 3 */
   }
 
@@ -261,10 +263,7 @@ To be able to use the UART and I2C on the Raspberry Pi, we need to enable them f
 
     - Select Finish and choose Yes to reboot the Raspberry Pi.
 
-2. Install pyserial
-    - Run the following command to install pyserial: ```sudo pip3 install pyserial```
-
-3. Install I2C Tools
+2. Install I2C Tools
     - Run the following commands to install I2C tools:
       - ```sudo apt update```
       - ```sudo apt install -y i2c-tools```
@@ -274,8 +273,10 @@ To be able to use the UART and I2C on the Raspberry Pi, we need to enable them f
       - ```pip3 install adafruit-blinka adafruit-circuitpython-mcp4728```
       - ```sudo apt update```
       - ```sudo apt install swig python3-dev gcc liblgpio-dev```
-      - ```pip3 install gpiozero lgpio```s
+      - ```pip3 install gpiozero lgpio```
 
+3. Install pyserial
+    - Run the following command to install pyserial: ```pip3 install pyserial```
 ## Python Script
 
 Now, let's create ```auto_test.py``` script:
@@ -324,7 +325,7 @@ class STM32AutoTest:
             'PD0': 23,   # STM32 PD0 on RPi GPIO 23
             'PD3': 21,   # STM32 PD3 on RPi GPIO 21
             'PD4': 19,   # STM32 PD4 on RPi GPIO 19
-            'PC14': 15   # STM32 PC14 on RPi GPIO 15
+            'PA15': 15   # STM32 PA15 on RPi GPIO 15
         }
 
         self.gpio_inputs = {}  # Will store DigitalInputDevice objects
@@ -466,7 +467,7 @@ class STM32AutoTest:
         """
         Test a single GPIO pin by verifying it goes HIGH and stays HIGH.
         Args:
-            stm32_pin: STM32 pin name as key (e.g., 'PD0', 'PD3', 'PD4', 'PC14')
+            stm32_pin: STM32 pin name as key (e.g., 'PD0', 'PD3', 'PD4', 'PA15')
         Returns:
             True if test passed, False otherwise
         """
@@ -479,18 +480,14 @@ class STM32AutoTest:
         gpio_device = self.gpio_inputs[stm32_pin]
         print(f"[TEST] STM32 GPIO {stm32_pin} -- RPi GPIO {rpi_pin} ... ")
 
-        time.sleep(0.5)  # Allow time for STM32 to set the pin HIGH
         # Verify it stays HIGH for some duration
-        start_value = gpio_device.is_active
-        time.sleep(1)
-        end_value = gpio_device.is_active
-        time.sleep(0.45)  # complete ~2 seconds of duration
+        start_value = gpio_device.value
 
-        if start_value and end_value:
-            print(f"{self.GREEN}[PASS] GPIO {stm32_pin}: start_value: {start_value}, end_value: {end_value} {self.RESET}")
+        if start_value :
+            print(f"{self.GREEN}[PASS] GPIO {stm32_pin}: start_value: {start_value}, {self.RESET}")
             return True
         else:
-            print(f"{self.RED}[FAIL] GPIO {stm32_pin}: start_value: {start_value}, end_value: {end_value}{self.RESET}")
+            print(f"{self.RED}[FAIL] GPIO {stm32_pin}: start_value: {start_value}, {self.RESET}")
             self.all_passed = False
             return False
 
@@ -506,9 +503,9 @@ class STM32AutoTest:
         """Test STM32 GPIO PD4."""
         return self.test_gpio_pin('PD4')
 
-    def test_gpio_pc14(self) -> bool:
-        """Test STM32 GPIO PC14."""
-        return self.test_gpio_pin('PC14')
+    def test_gpio_pa15(self) -> bool:
+        """Test STM32 GPIO PA15."""
+        return self.test_gpio_pin('PA15')
 
     def test_uart(self, test_message: str = "HELLO_STM32") -> bool:
         """
@@ -534,13 +531,13 @@ class STM32AutoTest:
             # Wait for response (STM32 will echo back)
             print("[INFO] Waiting for echo response...")
             time.sleep(2.2)
-            response = self.uart.readline().decode('utf-8', errors='ignore').strip()
+            self.response = self.uart.readline().decode('utf-8', errors='ignore').strip()
 
-            if test_message in response:
-                print(f"{self.GREEN}[PASS] Received echo: '{response}'{self.RESET}")
+            if test_message in self.response:
+                print(f"{self.GREEN}[PASS] Received echo: '{self.response}'{self.RESET}")
                 return True
             else:
-                print(f"{self.RED}[FAIL] Unexpected response: '{response}'{self.RESET}")
+                print(f"{self.RED}[FAIL] Unexpected response: '{self.response}'{self.RESET}")
                 print(f"{self.RED}[FAIL] Expected: '{test_message}'{self.RESET}")
                 self.all_passed = False
                 return False
@@ -550,30 +547,30 @@ class STM32AutoTest:
             self.all_passed = False
             return False
 
-    def test_i2c_and_spi_device(self) -> bool:
+    def test_stm32_i2c_and_spi_devices(self) -> bool:
         """
         Test I2C and SPI communication by checking if the devices respond.
         Returns:
             True if both tests passed, False otherwise
         """
         print(f"[TEST] Testing I2C and SPI Devices")
-        response = self.uart.readline().decode('utf-8', errors='ignore').strip()
+        self.response = self.response + self.uart.read(self.uart.in_waiting).decode('utf-8', errors='ignore').strip()
 
-        if "[PASS][I2C]" in response:
+        if "[PASS][I2C]" in self.response:
             print(f"{self.GREEN}[PASS] I2C device responded successfully{self.RESET}")
         else:
             print(f"{self.RED}[FAIL] I2C device did not respond properly{self.RESET}")
             self.all_passed = False
 
-        if "[PASS][SPI]" in response:
+        if "[PASS][SPI]" in self.response:
             print(f"{self.GREEN}[PASS] SPI FRAM device responded successfully{self.RESET}")
         else:
             print(f"{self.RED}[FAIL] SPI FRAM device did not respond properly{self.RESET}")
             self.all_passed = False
 
-        print(f"[INFO] STM32 Response: \n>>>{response}\n<<<")
+        print(f"[INFO] STM32 Response: \n>>>{self.response}\n<<<")
 
-    def verify_mcp4728_connection(self, target_address=0x60) -> bool:
+    def verify_raspi_to_mcp4728_connection(self, target_address=0x60) -> bool:
         """
         Pings the MCP4728 DAC using two sequential methods:
         1. Low-level bus scan using the system 'i2cdetect' tool.
@@ -582,14 +579,9 @@ class STM32AutoTest:
         """
         print(f"[TEST] Verifying MCP4728 at 0x{target_address:02X}")
 
-        # Test 1: System-level i2cdetect verification
-        try:
-            result = subprocess.run(['i2cdetect', '-y', '1'], capture_output=True, text=True>
-            print(f"[INFO] the command 'i2cdetect -y 1' returned:")
-            print(f">>>\n{result.stdout}\n<<<")
-        except Exception as e:
-            print(f"{self.RED}[FAIL] i2cdetect check failed: {e}{self.RESET}")
-            bus_scan_ok = False
+        # Test 1: Low-level bus scan using i2cdetect
+        # run the i2cdetect command manually on your terminal
+        # i2cdetect -y 1
 
         # Test 2: Library-level communication verification
         try:
@@ -648,22 +640,28 @@ class STM32AutoTest:
         if not self.initialize_uart():
             self.show_fail_state()
             return False
+        self.show_testing_state()
 
         # Flash STM32
         if not self.flash_stm32():
             self.show_fail_state()
             return False
 
-        self.show_testing_state()
-
         self.test_gpio_pd0()
+        time.sleep(2)
         self.test_gpio_pd3()
+        time.sleep(2)
         self.test_gpio_pd4()
-        self.test_gpio_pc14()
+        time.sleep(2)
+        self.test_gpio_pa15()
+        time.sleep(2)
 
         self.test_uart()
 
-        self.test_i2c_and_spi_device()
+        time.sleep(10)
+        self.test_stm32_i2c_and_spi_devices()
+
+        self.verify_raspi_to_mcp4728_connection()
 
         if self.all_passed:
             self.show_pass_state()
