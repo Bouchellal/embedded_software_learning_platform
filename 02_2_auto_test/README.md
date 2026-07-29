@@ -20,7 +20,7 @@ Let's create a new STM32 project and configure these pins:
 
 ![Auto Test Pin Configuration](../.images/02_hands_on_platform/auto_test.png)
 
-![SPI specific configuration](../.images/02_hands_on_platform/spi_config.png)
+
 
 In the main.c file, the idea is to test each group of interfaces (GPIOs, UART, I2C, SPI) one by one. 
 
