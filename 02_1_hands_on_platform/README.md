@@ -2,6 +2,9 @@
 
 To start, power up the hardware platform using the dedicated power supply.
 
+Here is the pinout schematic of the Avionic Embedded Software Platform:
+
+![Hands-On Platform](../.images/02_hands_on_platform/Avionic_Embedded_Software_Platform-Platfrom%20Pinout%20Schematic.jpg)
 
 # Chapter 1: connecting to the Raspberry Pi
 
