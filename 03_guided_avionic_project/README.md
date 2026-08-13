@@ -22,6 +22,7 @@ You will be working closely with our engineering team, which consists of:
 
 | Chapter Link | Role | Description |
 |--------------|------|-------------|
+| [Chapter 0](chapter_00/) | Zoubir, the senior System Engineer | Responsible for teaching you the V cycle process of the company. |
 | [Chapter 1](chapter_01/) | Djamal Doe (as in John Doe), the System Architect | Responsible for designing the overall architecture of the software solution and ensuring that it meets the client's requirements. |
 | [Chapter 2](chapter_02/) | Aziz, the Electronic and Hardware Engineer | Responsible for designing and implementing the hardware components of the solution, including the sensors and interfaces. |
 | [Chapter 3](chapter_03/) | You, the Embedded Software Engineer | Responsible for developing the embedded software solution that interfaces with the hardware components and collects data in real-time. |
