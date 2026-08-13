@@ -191,7 +191,7 @@ As you can see, the system V cycle is the first to starts. Then comes in paralle
 
 Yet, all engineer have to collaborate on early technical question that overlaps between system level, hardware, mechanical and software too.
 
-![Full V Cycle Simple](../../.images/03_guided_avionic_project/Full-V-Cycle-No-traceability-No-inter-unit.svg)
+![Full V Cycle Simple](../../.images/03_guided_avionic_project/Full-V-Cycle-No-Traceability-No-Inter-Unit.svg)
 
 ## List of documents
 
