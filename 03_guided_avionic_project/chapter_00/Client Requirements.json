@@ -1,0 +1,128 @@
+[
+  {
+    "identifier": "CLOCK-CR-0001",
+    "title": "Display current time",
+    "text": "The clock shall have a display that shows the current time in hours, minutes, and seconds.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0002",
+    "title": "Display alarm settings on request",
+    "text": "On request, the clock shall display the current alarm settings in hours and minutes.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0003",
+    "title": "Alarm buzzer",
+    "text": "The clock shall have a buzzer that sounds an alarm at the specified time.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0004",
+    "title": "User time and alarm setting button",
+    "text": "The clock shall have a button that allows the user to set the current time and alarm time.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0005",
+    "title": "Continuous power operation",
+    "text": "The clock shall have a power source that allows it to operate continuously without interruption for up to 60 days.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0006",
+    "title": "Display visibility distance",
+    "text": "The clock display shall be visible from a distance of at least 3 meters in normal lighting conditions.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0007",
+    "title": "Display visibility angle",
+    "text": "The clock display shall be visible from an angle of at least 45 degrees from all directions in normal lighting conditions.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0008",
+    "title": "Alarm sound level",
+    "text": "The clock buzzer shall have a sound level of at least 70 decibels at a distance of 1 meter.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0009",
+    "title": "Drop resistance",
+    "text": "The clock shall survive a drop from a height of 1 meter onto a hard surface without damage to the display or buzzer.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0010",
+    "title": "Operating temperature range",
+    "text": "The clock shall operate in a temperature range of -10°C to 50°C without damage.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0011",
+    "title": "Operating humidity range",
+    "text": "The clock shall operate in a humidity range of 10% to 90% without damage.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0012",
+    "title": "Display stability angle",
+    "text": "The clock shall stand stable on a flat surface with the display forming an angle of 30 degrees ± 2 degrees with the horizon.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0013",
+    "title": "Power-up default state",
+    "text": "The clock shall initialize to a valid default time and alarm state after power-up.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-CR-0014",
+    "title": "Snooze feature",
+    "text": "The clock shall allow the user to snooze the alarm for a specified duration.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "System",
+    "variant": "current"
+  }
+]

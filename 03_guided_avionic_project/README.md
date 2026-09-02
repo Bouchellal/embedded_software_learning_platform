@@ -16,6 +16,11 @@ To achieve this, we will be developing an embedded software solution that can in
 
 ![Aircraft Engine](../.images/03_guided_avionic_project/aircraft_engine.jpg)
 
+The equipment will look like this:
+
+![Avionic Engine Monitoring Equipment](../.images/03_guided_avionic_project/equipment_example.png)
+(I got this image from the internet, it is not the actual equipment that we will be using in our project, but it is a good representation of what we are trying to achieve.)
+
 # 3. Engineering Team
 
 You will be working closely with our engineering team, which consists of:
@@ -33,7 +38,7 @@ You will also be working with:
 
 # 4. Let's start!
 
-Go to [Chapter 1](chapter_01/), once finished, go through the [Chapter 2](chapter_02/) and [Chapter 3](chapter_03/).
+Go through the chapters in order, learn and apply the concepts, ask questions as you go to your peers and mentors.
 
 Order is important!
 

@@ -1,0 +1,263 @@
+[
+  {
+    "identifier": "CLOCK-SYS-0001",
+    "title": "Current time display format",
+    "text": "The system shall display the current time using hours, minutes, and seconds in a readable format.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0001",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0002",
+    "title": "Current time update rate",
+    "text": "The system shall update the displayed time continuously so that the displayed value remains synchronized with the current time.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0001",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0003",
+    "title": "Display resolution",
+    "text": "The system shall display the time with a resolution of one second or better.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0001",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0004",
+    "title": "Alarm settings display request",
+    "text": "The system shall provide a user request action that displays the current alarm settings.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0002",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0005",
+    "title": "Alarm value presentation",
+    "text": "The system shall display the alarm time in hours and minutes in a clear and readable format.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0002",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0006",
+    "title": "Alarm trigger condition",
+    "text": "The system shall compare the current time against the configured alarm time and determine when the alarm condition is reached.",
+    "verification_method": "Analysis",
+    "parent": "CLOCK-CR-0003",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0007",
+    "title": "Alarm actuation",
+    "text": "The system shall activate the buzzer when the current time matches the configured alarm time.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0003",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0008",
+    "title": "Alarm indication duration",
+    "text": "The system shall sustain the alarm activation for an ALARM_DURATION of 1 minute to be clearly perceived by the user.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0003",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0009",
+    "title": "Manual time setting capability",
+    "text": "The system shall provide a user interface mechanism to set the current time.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0004",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0010",
+    "title": "Manual alarm setting capability",
+    "text": "The system shall provide a user interface mechanism to set the alarm time.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0004",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0011",
+    "title": "User input validation",
+    "text": "The system shall validate user-entered time and alarm values to ensure they are within valid ranges.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0004",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0012",
+    "title": "Power supply continuity",
+    "text": "The system shall be powered by an internal source capable of supporting continuous operation without interruption for up to 60 days.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0005",
+    "allocation": "Hardware;Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0013",
+    "title": "Power autonomy margin",
+    "text": "The system shall maintain functionality throughout the required operating duration without requiring a power interruption or recharge cycle.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0005",
+    "allocation": "Hardware;Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0014",
+    "title": "Display readability distance",
+    "text": "The system shall allow the display to be read from at least 3 meters under normal lighting conditions.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0006",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0015",
+    "title": "Display contrast and visibility",
+    "text": "The display shall provide sufficient contrast and luminance to remain readable in normal lighting conditions at the specified viewing distance.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0006",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0016",
+    "title": "Viewing angle requirement",
+    "text": "The system shall maintain display readability over an angular range of at least 45 degrees from the nominal viewing direction.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0007",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0017",
+    "title": "Display visibility in all directions",
+    "text": "The system shall be designed to keep the display legible when viewed from all directions within the specified 45-degree angular requirement.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0007",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0018",
+    "title": "Buzzer sound level",
+    "text": "The system shall generate an alarm sound level of at least 70 dB measured at a distance of 1 meter.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0008",
+    "allocation": "Hardware;Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0019",
+    "title": "Buzzer sound output repeatability",
+    "text": "The system shall generate an alarm sound level of 70 dB ± 3 dB measured at a distance of 1 meter from the buzzer for each activation, with a maximum variation of 3 dB between 10 consecutive alarm activations during normal operation.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0008",
+    "allocation": "Hardware;Software",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0020",
+    "title": "Impact resistance",
+    "text": "The system shall withstand a drop from 1 meter onto a hard surface without damage to the display or buzzer.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0009",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0021",
+    "title": "Impact integrity",
+    "text": "The system shall preserve the functionality of the display and alarm buzzer after the specified drop test.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0009",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0022",
+    "title": "Temperature operating range",
+    "text": "The system shall operate without damage across a temperature range from -10°C to 50°C.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0010",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0023",
+    "title": "Temperature recovery behavior",
+    "text": "The system shall recover normal operation after exposure to the specified minimum and maximum operating temperatures without permanent damage.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0010",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0024",
+    "title": "Humidity operating range",
+    "text": "The system shall operate without damage across a humidity range from 10% to 90%.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0011",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0025",
+    "title": "Humidity resilience",
+    "text": "The system shall maintain its functionality and structural integrity after exposure to the specified humidity range.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0011",
+    "allocation": "Hardware;Mechanical",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0026",
+    "title": "Stability on a flat surface",
+    "text": "The system shall remain stable on a flat surface during normal operation.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0012",
+    "allocation": "Mechanical;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0027",
+    "title": "Display inclination tolerance",
+    "text": "The system shall maintain the display angle within 30° ± 2° relative to the horizon when placed on a flat surface.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0012",
+    "allocation": "Mechanical;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0028",
+    "title": "Safe default initialization",
+    "text": "The system shall initialize into a safe default state after power-up, including a valid time reference and no active alarm until the user configures an alarm.",
+    "verification_method": "Test",
+    "parent": "",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  },
+  {
+    "identifier": "CLOCK-SYS-0029",
+    "title": "Snooze button and delay function",
+    "text": "The system shall provide a dedicated snooze button that, when pressed during an active alarm, triggers a software function to delay the alarm for a specified snooze duration without requiring a full alarm reset.",
+    "verification_method": "Test",
+    "parent": "CLOCK-CR-0014",
+    "allocation": "Software;Hardware",
+    "variant": "current"
+  }
+]
