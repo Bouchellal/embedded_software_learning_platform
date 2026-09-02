@@ -201,6 +201,7 @@ Before diving into each document, it is important to understand the concept of r
 
 First, let us explain the documents that are on the left side of each V cycle. These are the documents used for planning and designing before implementation begins. We will use as an example a desktop clock that has a display, a buzzer, and a button.
 
+___
 ### System Level Documents
 
 <details>
@@ -363,6 +364,7 @@ Example of Block Diagram:
 
 </details>
 
+___
 ### Hardware Level Documents
 
 <details>
@@ -550,7 +552,7 @@ Example:
 
 </details>
 
-
+___
 ### Software Level Documents
 
 <details>
@@ -670,6 +672,7 @@ Here is an unrelated example of a class diagram:
 
 </details>
 
+___
 ### Mechanical Level Documents
 
 <details>
@@ -747,6 +750,7 @@ Here is an unrelated example of a class diagram:
 
 </details>
 
+___
 ## List of documents during the verification phases
 
 Now that we talked about the documents on the left side of the V cycle, let us talk about the documents on the right side of the V cycle. These are the documents used for verification and validation after implementation is done.
