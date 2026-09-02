@@ -1111,6 +1111,7 @@ Standalone means that it should be designed with a **dedicated V cycle**, it sho
 
 Why? because test benches should be documented to be reproducible, reliable, traceable and deterministic. If we don't have a dedicated V cycle for the test bench, we will not be able to guarantee that.
 
+___
 #### System Test Bench
 
 Usually, combines a PC, a DC/AC power supply controlled by the PC via a USB or Ethernet interface, some relays and Digital Input/Output (I/O) interfaces.
@@ -1119,7 +1120,7 @@ You put you product on the table, connect it to the test bench via harnesses, an
 
 ![System Test Bench](../../.images/03_guided_avionic_project/test_bench_system.jpg)
 
-
+___
 #### Hardware Test Bench
 
 Usually, combines a PC, a DC/AC power supply controlled by the PC via a USB or Ethernet interface, some relays and Digital Input/Output (I/O) interfaces.
@@ -1136,7 +1137,7 @@ Notice in this picture of a Raspberry Pi board the different available test poin
 
 ![Hardware Test Bench](../../.images/03_guided_avionic_project/test_bench_pcb_3.jpg)
 
-
+___
 #### Software Test Bench
 
 Well, the software test bench is usually a Linux Raspberry Pi with a Python interpreter and some libraries that allow us to run the verification procedures via automated python scripts (or other automation tools).
@@ -1151,7 +1152,7 @@ The diagram below shows the full V cycle with the inter-unit dependencies highli
 
 ![Full V Cycle Simple](../../.images/03_guided_avionic_project/Full-V-Cycle-without-traceability-with-inter-unit.svg)
 
-
+___
 ## Last Step: Traceability Matrixes
 
 - To make sure that each requirement was implemented in the flow down through the different units.
